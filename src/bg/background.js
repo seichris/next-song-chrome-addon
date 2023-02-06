@@ -13,7 +13,6 @@ chrome.commands.onCommand.addListener(function(command) {
         navigator.mediaSession.setActionHandler('nexttrack', () => {
           forSaleInterlude.play();
         });
-      };
-    
-    });
+      }
+  }
 });
