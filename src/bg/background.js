@@ -1,13 +1,19 @@
-// if you checked "fancy-settings" in extensionizr.com, uncomment this lines
+chrome.commands.onCommand.addListener(function(command) {
+  if (command === "play_next") {
+    console.log("Playing next song");
+    // Set the media session metadata for the current song
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: "Song Title",
+      artist: "Artist Name",
+      album: "Album Name",
+      artwork: [
+        { src: "artwork_url", sizes: "128x128", type: "image/png" },
+      ],
+    });
 
-// var settings = new Store("settings", {
-//     "sample_setting": "This is how you use Store.js to remember values"
-// });
-
-
-//example of using a message handler from the inject scripts
-chrome.extension.onMessage.addListener(
-  function(request, sender, sendResponse) {
-  	chrome.pageAction.show(sender.tab.id);
-    sendResponse();
-  });
+    // Register a callback to play the next song when the 'nexttrack' action is activated
+    navigator.mediaSession.setActionHandler('nexttrack', function() {
+      // Code to play the next song goes here
+    });
+  }
+});
