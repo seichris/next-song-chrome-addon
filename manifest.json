@@ -24,8 +24,8 @@
   "commands": {
     "play_next": {
       "suggested_key": {
-        "default": "Ctrl+Shift+.",
-        "mac": "MacCtrl+Shift+."
+        "default": "Ctrl+Shift+U",
+        "mac": "MacCtrl+Shift+U"
       },
       "description": "Play next song"
     }
