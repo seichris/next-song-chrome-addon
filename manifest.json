@@ -33,6 +33,6 @@
   "permissions": [
     "activeTab",
     "tabs",
-    "https://*spotify.com/*"
+    "https://*.spotify.com/*"
   ]
 }
