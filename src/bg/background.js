@@ -16,7 +16,7 @@ chrome.commands.onCommand.addListener(function(command) {
     // Register a callback to play the next song when the 'nexttrack' action is activated
     navigator.mediaSession.setActionHandler('nexttrack', function() {
       let nextImage = new Image();
-      nextImage.src = "data:image/png;base64,iVBORw0KG...";
+      nextImage.src = "https://raw.githubusercontent.com/seichris/ETHgasPFPs/main/docs/images/1.jpg";
 
       // Update the metadata for the next song
       let nextSong = {
