@@ -1,8 +1,8 @@
 {
-  "name": "CHANGE THIS : Extension boilerplate",
+  "name": "Play Next Song",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "This extension was created with the awesome extensionizr.com",
+  "description": "This extension plays the next song when the icon is clicked or a keyboard shortcut is pressed",
   "homepage_url": "http://extensionizr.com",
   "icons": {
     "16": "icons/icon16.png",
@@ -22,6 +22,7 @@
     "default_popup": "src/browser_action/browser_action.html"
   },
   "permissions": [
+    "activeTab",
     "tabs",
     "https://*spotify.com/*"
   ]
