@@ -2,7 +2,7 @@ chrome.commands.onCommand.addListener(function(command) {
   if (command === "play_next") {
     console.log("Playing next song");
     let image = new Image();
-    image.src = "data:image/png;base64,iVBORw0KG...";
+    image.src = "https://raw.githubusercontent.com/seichris/ETHgasPFPs/main/docs/images/1.jpg";
 
     navigator.mediaSession.metadata = new MediaMetadata({
       title: "Song Title",
