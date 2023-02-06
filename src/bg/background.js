@@ -1,13 +1,15 @@
 chrome.commands.onCommand.addListener(function(command) {
   if (command === "play_next") {
     console.log("Playing next song");
-    // Set the media session metadata for the current song
+    let image = new Image();
+    image.src = "data:image/png;base64,iVBORw0KG...";
+
     navigator.mediaSession.metadata = new MediaMetadata({
       title: "Song Title",
       artist: "Artist Name",
       album: "Album Name",
       artwork: [
-        { src: "artwork_url", sizes: "128x128", type: "image/png" },
+        { src: image.src, sizes: "128x128", type: "image/png" },
       ],
     });
 
