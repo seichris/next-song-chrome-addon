@@ -1,5 +1,5 @@
 let image = new Image();
-image.src = "data:image/png;base64,iVBORw0KG...";
+image.src = "https://raw.githubusercontent.com/seichris/ETHgasPFPs/main/docs/images/1.jpg";
 
 // Set the media session metadata for the current song
 navigator.mediaSession.metadata = new MediaMetadata({
