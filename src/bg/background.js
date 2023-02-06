@@ -24,5 +24,4 @@ chrome.commands.onCommand.addListener(function(command) {
       source.connect(context.destination);
       source.start();
     });
-  }
 });
