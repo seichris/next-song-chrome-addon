@@ -15,7 +15,27 @@ chrome.commands.onCommand.addListener(function(command) {
 
     // Register a callback to play the next song when the 'nexttrack' action is activated
     navigator.mediaSession.setActionHandler('nexttrack', function() {
-      // Code to play the next song goes here
+      let nextImage = new Image();
+      nextImage.src = "data:image/png;base64,iVBORw0KG...";
+
+      // Update the metadata for the next song
+      let nextSong = {
+        title: "Next Song Title",
+        artist: "Next Artist Name",
+        album: "Next Album Name",
+        artwork: [
+          { src: nextImage.src, sizes: "128x128", type: "image/png" },
+        ],
+      };
+
+      // Set the new metadata for the media session
+      navigator.mediaSession.metadata = new MediaMetadata(nextSong);
+
+      // Play the next song
+      let context = new (window.AudioContext || window.webkitAudioContext)();
+      let source = context.createMediaElementSource(new Audio("next_song_url"));
+      source.connect(context.destination);
+      source.start();
     });
   }
 });
