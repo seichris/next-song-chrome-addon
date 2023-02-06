@@ -32,7 +32,8 @@ chrome.commands.onCommand.addListener(function(command) {
       navigator.mediaSession.metadata = new MediaMetadata(nextSong);
 
       // Play the next song
-      let audio = new Audio("next_song_url");
+      let audio = new HTMLAudioElement();
+      audio.src = "next_song_url";
       audio.addEventListener("error", function(event) {
         console.error("Failed to play audio: ", event.target.error.code);
       });
