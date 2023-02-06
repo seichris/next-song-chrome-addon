@@ -1,22 +1,28 @@
+let image = new Image();
+image.src = "data:image/png;base64,iVBORw0KG...";
+
 // Set the media session metadata for the current song
 navigator.mediaSession.metadata = new MediaMetadata({
   title: "Song Title",
   artist: "Artist Name",
   album: "Album Name",
   artwork: [
-    { src: "artwork_url", sizes: "128x128", type: "image/png" },
+    { src: image.src, sizes: "128x128", type: "image/png" },
   ],
 });
 
 // Register a callback to play the next song when the 'nexttrack' action is activated
 navigator.mediaSession.setActionHandler('nexttrack', function() {
+  let nextImage = new Image();
+  nextImage.src = "data:image/png;base64,iVBORw0KG...";
+
   // Update the metadata for the next song
   let nextSong = {
     title: "Next Song Title",
     artist: "Next Artist Name",
     album: "Next Album Name",
     artwork: [
-      { src: "next_artwork_url", sizes: "128x128", type: "image/png" },
+      { src: nextImage.src, sizes: "128x128", type: "image/png" },
     ],
   };
 
