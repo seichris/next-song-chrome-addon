@@ -2,33 +2,27 @@
   "manifest_version": 3,
   "name": "Next Song Shortcut",
   "version": "1.0",
-  "description": "Play the next song on supported websites with a custom shortcut key.",
+  "description": "Play the next song on supported websites using a keyboard shortcut.",
+  "permissions": ["tabs", "scripting", "activeTab"],
   "action": {
-    "default_popup": "popup.html",
     "default_icon": {
-      "16": "icons/icon16.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
-    }
-  },
-  "permissions": [
-    "activeTab",
-    "scripting"
-  ],
-  "commands": {
-    "next_song": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+H"
-      },
-      "description": "Play next song"
+      "48": "icons/icon48.png"
     }
   },
   "background": {
     "service_worker": "background.js"
   },
+  "commands": {
+    "next_song": {
+      "suggested_key": {
+        "default": "Alt+Shift+N"
+      },
+      "description": "Play the next song on supported websites"
+    }
+  },
   "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "48": "icons/icon48.png"
   }
 }
+
+
