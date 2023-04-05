@@ -10,9 +10,9 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
 
 chrome.commands.onCommand.addListener(async (command) => {
   console.log(`Command received: ${command}`);
-  if (command === 'next_song' || command === 'pause_media') {
+  if (command === 'next_song' || command === 'pause_media' || command === 'previous_media') {
+    const action = command === 'next_song' ? 'next' : command === 'pause_media' ? 'playPause' : 'previous';
     const tabs = await chrome.tabs.query({ url: ['*://*.youtube.com/*', '*://*.open.spotify.com/*', '*://*.music.youtube.com/*', '*://*.soundcloud.com/*'] });
-    const action = command === 'next_song' ? 'next' : 'playPause';
 const activeTabs = tabs.filter(tab => tab.active && tab.audible);
       if (activeTabs.length) {
         lastPlayedTabId = activeTabs[0].id;

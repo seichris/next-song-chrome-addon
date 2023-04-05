@@ -10,19 +10,23 @@ chrome.runtime.onMessage.addListener((message) => {
   const selectors = {
     'open.spotify.com': {
       next: '.player-controls__buttons button[data-testid="control-button-skip-forward"]',
-      playPause: '.player-controls__buttons button[data-testid="control-button-playpause"]'
+      playPause: '.player-controls__buttons button[data-testid="control-button-playpause"]',
+      previous: '.player-controls__buttons button[data-testid="control-button-skip-back"]'
     },
     'music.youtube.com': {
       next: 'ytmusic-player-bar .next-button',
-      playPause: 'ytmusic-player-bar .play-pause-button'
+      playPause: 'ytmusic-player-bar .play-pause-button',
+      previous: 'ytmusic-player-bar .previous-button'
     },
     'soundcloud.com': {
       next: '.playControls__next',
-      playPause: '.playControls__play, .playControls__pause'
+      playPause: '.playControls__play, .playControls__pause',
+      previous: '.playControls__prev'
     },
     'www.youtube.com': {
       next: 'ytd-player .ytp-next-button',
-      playPause: 'ytd-player .ytp-play-button'
+      playPause: 'ytd-player .ytp-play-button',
+      previous: 'ytd-player .ytp-prev-button'
     }
   };
 
