@@ -1,0 +1,17 @@
+body {
+  width 300px;
+  font-family Arial, sans-serif;
+}
+
+form {
+  display flex;
+  flex-direction column;
+}
+
+label, input {
+  margin-bottom 5px;
+}
+
+button {
+  margin-top 10px;
+}

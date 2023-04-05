@@ -6,6 +6,16 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
     lastPlayedTabId = sender.tab.id;
     console.log(`Last played tab ID set to ${lastPlayedTabId}`);
   }
+if (message.action === 'get_current_playing_tab') {
+    if (lastPlayedTabId) {
+      chrome.tabs.get(lastPlayedTabId, (tab) => {
+        sendResponse({ action: 'current_playing_tab', url: tab.url });
+      });
+      return true; // Required to allow sendResponse to be called asynchronously
+    } else {
+      sendResponse({ action: 'current_playing_tab', url: 'No media playing' });
+    }
+  }
 });
 
 chrome.commands.onCommand.addListener(async (command) => {
@@ -55,7 +65,6 @@ function updateExtensionIcon(hostname) {
 }
 
 chrome.runtime.onMessage.addListener(async (message, sender) => {
-  // ... existing code ...
   if (message.action === 'media_played') {
     lastPlayedTabId = sender.tab.id;
     updateExtensionIcon(sender.tab.url);

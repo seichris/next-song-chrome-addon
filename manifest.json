@@ -4,7 +4,9 @@
   "version": "1.0",
   "description": "Play the next song on supported websites using a keyboard shortcut.",
   "permissions": ["tabs", "scripting", "activeTab"],
+"host_permissions": ["*://*.youtube.com/*", "*://*.open.spotify.com/*", "*://*.music.youtube.com/*", "*://*.soundcloud.com/*"],
   "action": {
+    "default_popup": "index.html",
     "default_icon": {
       "48": "icons/icon48.png"
     }
@@ -12,6 +14,13 @@
   "background": {
     "service_worker": "background.js"
   },
+"content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*", "*://*.open.spotify.com/*", "*://*.music.youtube.com/*", "*://*.soundcloud.com/*"],
+      "js": ["content_script.js"],
+      "run_at": "document_idle"
+    }
+  ],
   "commands": {
    "previous_media": {
       "suggested_key": {
