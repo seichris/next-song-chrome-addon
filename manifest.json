@@ -13,13 +13,25 @@
     "service_worker": "background.js"
   },
   "commands": {
-    "next_song": {
+   "previous_media": {
       "suggested_key": {
-        "default": "Alt+Shift+N"
+        "default": "Ctrl+Shift+1"
       },
-      "description": "Play the next song on supported websites"
-    }
+      "description": "Play previous media"
+    },
+  "next_song": {
+    "suggested_key": {
+      "default": "Ctrl+Shift+3"
+    },
+    "description": "Play next song"
   },
+  "pause_media": {
+    "suggested_key": {
+      "default": "Ctrl+Shift+2"
+    },
+    "description": "Pause or play media"
+  }
+},
   "icons": {
     "48": "icons/icon48.png"
   }

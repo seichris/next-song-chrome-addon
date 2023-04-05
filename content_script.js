@@ -1,35 +1,40 @@
 console.log('Content script loaded.');
 
 document.addEventListener('click', () => {
-  console.log('Click event detected.');
   chrome.runtime.sendMessage({ action: 'media_played' });
 });
 
-function playNextSong() {
-  console.log('playNextSong function called.');
+chrome.runtime.onMessage.addListener((message) => {
+  const action = message.action;
 
-  // Supported websites
-  const nextButtons = {
-    'open.spotify.com': '.player-controls__buttons button[data-testid="control-button-skip-forward"]',
-    'music.youtube.com': 'ytmusic-player-bar .next-button',
-    'soundcloud.com': '.playControls__next',
-    'www.youtube.com': 'ytd-player .ytp-next-button'
+  const selectors = {
+    'open.spotify.com': {
+      next: '.player-controls__buttons button[data-testid="control-button-skip-forward"]',
+      playPause: '.player-controls__buttons button[data-testid="control-button-playpause"]'
+    },
+    'music.youtube.com': {
+      next: 'ytmusic-player-bar .next-button',
+      playPause: 'ytmusic-player-bar .play-pause-button'
+    },
+    'soundcloud.com': {
+      next: '.playControls__next',
+      playPause: '.playControls__play, .playControls__pause'
+    },
+    'www.youtube.com': {
+      next: 'ytd-player .ytp-next-button',
+      playPause: 'ytd-player .ytp-play-button'
+    }
   };
 
-  for (const site in nextButtons) {
+  for (const site in selectors) {
     if (window.location.hostname.includes(site)) {
-      console.log(`Site matched: ${site}`);
-      const nextButton = document.querySelector(nextButtons[site]);
-      if (nextButton) {
-        console.log('Next button found and clicked.');
-        nextButton.click();
+      const buttonSelector = selectors[site][action];
+      const button = document.querySelector(buttonSelector);
+
+      if (button) {
+        button.click();
         break;
-      } else {
-        console.log('Next button not found.');
       }
     }
   }
-}
-
-// Call playNextSong() when the content script is executed
-playNextSong();
+});
