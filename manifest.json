@@ -1,37 +1,33 @@
 {
-  "name": "Play Next Song",
-  "version": "0.0.1",
-  "manifest_version": 2,
-  "description": "This extension plays the next song when the icon is clicked or a keyboard shortcut is pressed",
-  "homepage_url": "https://github.com/seichris/next-song-chrome-addon",
-  "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+  "manifest_version": 3,
+  "name": "Next Song Shortcut",
+  "version": "1.0",
+  "description": "Play the next song on supported websites with a custom shortcut key.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
   },
-  "default_locale": "en",
-  "background": {
-    "scripts": [
-      "src/bg/background.js"
-    ],
-    "persistent": false
-  },
-  "browser_action": {
-    "default_icon": "icons/icon19.png",
-    "default_title": "play next song",
-    "default_popup": "src/browser_action/browser_action.html"
-  },
+  "permissions": [
+    "activeTab"
+  ],
   "commands": {
-    "play_next": {
+    "next_song": {
       "suggested_key": {
-        "default": "Ctrl+Shift+U",
-        "mac": "MacCtrl+Shift+U"
+        "default": "Ctrl+Shift+N"
       },
       "description": "Play next song"
     }
   },
-  "permissions": [
-    "activeTab",
-    "tabs"
-  ]
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
 }
