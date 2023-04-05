@@ -35,3 +35,29 @@ const activeTabs = tabs.filter(tab => tab.active && tab.audible);
     }
   }
 });
+
+function updateExtensionIcon(hostname) {
+  let iconName;
+
+  if (hostname.includes('open.spotify.com')) {
+    iconName = 'icon_spotify.png';
+  } else if (hostname.includes('www.youtube.com')) {
+    iconName = 'icon_youtube.png';
+  } else if (hostname.includes('music.youtube.com')) {
+    iconName = 'icon_ytmusic.png';
+  } else if (hostname.includes('soundcloud.com')) {
+    iconName = 'icon_soundcloud.png';
+  }
+
+  if (iconName) {
+    chrome.action.setIcon({ path: `icons/${iconName}` });
+  }
+}
+
+chrome.runtime.onMessage.addListener(async (message, sender) => {
+  // ... existing code ...
+  if (message.action === 'media_played') {
+    lastPlayedTabId = sender.tab.id;
+    updateExtensionIcon(sender.tab.url);
+  }
+});
