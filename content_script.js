@@ -52,8 +52,14 @@ chrome.runtime.onMessage.addListener((message) => {
 
       if (button) {
         button.click();
+        if (action === 'playPause') {
+          setTimeout(() => {
+            chrome.runtime.sendMessage({ action: 'media_played' });
+          }, 1000);
+        }
         break;
       }
     }
   }
 });
+

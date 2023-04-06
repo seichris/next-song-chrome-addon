@@ -1,5 +1,80 @@
 let lastPlayedTabId;
 let isPopupOpen = false;
+let latestMediaInfo = {};
+let lastPlayedMedia = null;
+
+function updateLatestMediaInfo(tab) {
+  latestMediaInfo = {
+    title: tab.title,
+    icon: getIconNameFromUrl(tab.url),
+  };
+}
+
+chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  if (message.action === 'media_played') {
+    lastPlayedTabId = sender.tab.id;
+    lastPlayedMedia = {
+      title: sender.tab.title,
+      icon: getIconNameFromUrl(sender.tab.url),
+    };
+  } else if (message.action === 'get_latest_media_info') {
+    sendResponse(lastPlayedMedia);
+  }
+});
+
+
+function getIconNameFromUrl(url) {
+  if (url.includes('open.spotify.com')) {
+    return 'icon_spotify.png';
+  } else if (url.includes('www.youtube.com')) {
+    return 'icon_youtube.png';
+  } else if (url.includes('music.youtube.com')) {
+    return 'icon_ytmusic.png';
+  } else if (url.includes('soundcloud.com')) {
+    return 'icon_soundcloud.png';
+  }
+}
+
+
+chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+  if (
+    changeInfo.status === 'complete' &&
+    (tab.url.includes('open.spotify.com') ||
+      tab.url.includes('www.youtube.com') ||
+      tab.url.includes('music.youtube.com') ||
+      tab.url.includes('soundcloud.com'))
+  ) {
+    if (tab.audible) {
+      lastPlayedMedia = {
+        title: tab.title,
+        icon: getIconForUrl(tab.url),
+      };
+    } else {
+      lastPlayedMedia = {
+        title: 'No media currently playing',
+        icon: '',
+      };
+    }
+
+    if (isPopupOpen) {
+      chrome.runtime.sendMessage({ action: 'update_popup' });
+    }
+  }
+});
+
+
+function getIconForUrl(url) {
+  if (url.includes('open.spotify.com')) {
+    return 'icon_spotify.png';
+  } else if (url.includes('www.youtube.com')) {
+    return 'icon_youtube.png';
+  } else if (url.includes('music.youtube.com')) {
+    return 'icon_ytmusic.png';
+  } else if (url.includes('soundcloud.com')) {
+    return 'icon_soundcloud.png';
+  }
+}
+
 
 chrome.runtime.onConnect.addListener((port) => {
   if (port.name === "popup_open_check") {
@@ -68,3 +143,15 @@ chrome.commands.onCommand.addListener(async (command) => {
       lastPlayedTabId = sender.tab.id;
     }
   });
+
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === 'media_played') {
+      lastPlayedTabId = sender.tab.id;
+    } else if (message.action === 'get_latest_media_info') {
+      sendResponse(latestMediaInfo);
+    } else if (message.action === 'update_popup') {
+      updateCurrentPlaying(latestMediaInfo);
+    }
+  });
+  
+  
