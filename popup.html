@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        width: 300px;
+        font-family: Arial, sans-serif;
+      }
+      a {
+        color: gray;
+        text-decoration: none;
+      }
+      .link {
+  margin-top: 10px;
+}
+      a:hover {
+        text-decoration: underline;
+      }
+      img {
+        vertical-align: baseline;
+        width: 12px;
+        height: 12px;
+        margin-right: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="media-info">
+      <img id="current-icon" src="" />
+      <span id="current-playing">Loading ...</span>
+    </div>
+    <div class="link">
+      <a id="shortcuts-link" href="#">Change keyboard shortcuts ></a>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>

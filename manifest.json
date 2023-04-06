@@ -4,9 +4,14 @@
   "version": "1.0",
   "description": "Play the next song on supported websites using a keyboard shortcut.",
   "permissions": ["tabs", "scripting", "activeTab"],
-"host_permissions": ["*://*.youtube.com/*", "*://*.open.spotify.com/*", "*://*.music.youtube.com/*", "*://*.soundcloud.com/*"],
+  "host_permissions": [
+    "*://*.youtube.com/*",
+    "*://*.open.spotify.com/*",
+    "*://*.music.youtube.com/*",
+    "*://*.soundcloud.com/*"
+  ],
   "action": {
-    "default_popup": "index.html",
+    "default_popup": "popup.html",
     "default_icon": {
       "48": "icons/icon48.png"
     }
@@ -14,36 +19,27 @@
   "background": {
     "service_worker": "background.js"
   },
-"content_scripts": [
-    {
-      "matches": ["*://*.youtube.com/*", "*://*.open.spotify.com/*", "*://*.music.youtube.com/*", "*://*.soundcloud.com/*"],
-      "js": ["content_script.js"],
-      "run_at": "document_idle"
-    }
-  ],
   "commands": {
-   "previous_media": {
+    "previous_media": {
       "suggested_key": {
         "default": "Ctrl+Shift+1"
       },
       "description": "Play previous media"
     },
-  "next_song": {
-    "suggested_key": {
-      "default": "Ctrl+Shift+3"
+    "next_song": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+3"
+      },
+      "description": "Play next song"
     },
-    "description": "Play next song"
+    "pause_media": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+2"
+      },
+      "description": "Pause or play media"
+    }
   },
-  "pause_media": {
-    "suggested_key": {
-      "default": "Ctrl+Shift+2"
-    },
-    "description": "Pause or play media"
-  }
-},
   "icons": {
     "48": "icons/icon48.png"
   }
 }
-
-
