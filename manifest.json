@@ -26,17 +26,23 @@
       },
       "description": "Play previous media"
     },
+    "pause_media": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+2"
+      },
+      "description": "Pause or play media"
+    },
     "next_song": {
       "suggested_key": {
         "default": "Ctrl+Shift+3"
       },
       "description": "Play next song"
     },
-    "pause_media": {
+    "find_active_tab": {
       "suggested_key": {
-        "default": "Ctrl+Shift+2"
+        "default": "Ctrl+Shift+4"
       },
-      "description": "Pause or play media"
+      "description": "Find active tab"
     }
   },
   "icons": {

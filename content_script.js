@@ -3,16 +3,18 @@ console.log("Content script loaded.");
 if (!window.__contentScriptInjected) {
   window.__contentScriptInjected = true;
 
-  document.addEventListener('click', () => {
-    if (window.location.hostname.includes('open.spotify.com')) {
-      console.log('Cannot execute content script on open.spotify.com due to security policies.');
+  document.addEventListener("click", () => {
+    if (window.location.hostname.includes("open.spotify.com")) {
+      console.log(
+        "Cannot execute content script on open.spotify.com due to security policies."
+      );
       return;
     }
-  
+
     try {
-      chrome.runtime.sendMessage({ action: 'media_played' });
+      chrome.runtime.sendMessage({ action: "media_played" });
     } catch (error) {
-      console.error('Extension context invalidated:', error);
+      console.error("Extension context invalidated:", error);
     }
   });
 }
@@ -52,9 +54,9 @@ chrome.runtime.onMessage.addListener((message) => {
 
       if (button) {
         button.click();
-        if (action === 'playPause') {
+        if (action === "playPause") {
           setTimeout(() => {
-            chrome.runtime.sendMessage({ action: 'media_played' });
+            chrome.runtime.sendMessage({ action: "media_played" });
           }, 1000);
         }
         break;
@@ -62,4 +64,3 @@ chrome.runtime.onMessage.addListener((message) => {
     }
   }
 });
-
